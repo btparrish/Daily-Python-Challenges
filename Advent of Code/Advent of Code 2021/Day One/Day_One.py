@@ -2055,7 +2055,6 @@ depths = [int(i) for i in raw_depths_split]
 depths_increased = 0
 for i in range(0,len(depths)-1):
   if depths[i+1]>depths[i]:
-    print(len(depths),i)
     depths_increased+=1
 # return the solution to the challenge, which is the number of times a depth in the series is greater in value than the previous depth
 print(depths_increased)
