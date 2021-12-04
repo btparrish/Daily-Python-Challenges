@@ -29,6 +29,9 @@ After following these instructions, you would have a horizontal position of 15 a
 
 Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?
 """
+#import raw_movements as string from another python file in directory
+import movements
+raw_movements = movements.raw_movements
 
 #convert raw movements string into list of raw "movements"
 raw_movements = raw_movement_string.split("\n")
