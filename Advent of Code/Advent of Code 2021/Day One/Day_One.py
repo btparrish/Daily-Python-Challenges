@@ -43,23 +43,25 @@ In this example, there are 7 measurements that are larger than the previous meas
 How many measurements are larger than the previous measurement?
 
 """
-# Import String of Raw Depths provided by challenge
-import raw_depths
-raw_depths_string = raw_depths.raw_depths_string
 
-#Convert Raw Depths Provided by Prompt into separated strings using str.split(). Then convert into list of values.
-raw_depths_split = raw_depths_string.split("\n")[1:]
-depths = [int(i) for i in raw_depths_split]
+#open and read our source data file
+import os
+opened_txt = open(path)
+raw_depths = opened_txt.read()
 
-#count number of times depth is increasing between time points
-depths_increased = 0
-for i in range(0,len(depths)-1):
-  if depths[i+1]>depths[i]:
-    depths_increased+=1
-# return the solution to the challenge, which is the number of times a depth in the series is greater in value than the previous depth
-print(depths_increased)
+#convert our raw depths into a list of strings and then convert each entry to int using list comprehension
+depths_as_string_list = raw_depths.split("\n")
+depth_list = [int(string) for string in depths_as_string_list]
 
-"""--- Part Two ---
+#compute how many entries are numerically greater in value than the previous entry by looping through the list of integers and adding 1 to a count if the next value is greater than the previous one
+times_greater = 0
+for i in range(0,len(depth_list)-1):
+    if depth_list[i+1]>depth_list[i]:
+        times_greater+=1
+print(times_greater)
+
+"""
+--- Part Two ---
 Considering every single measurement isn't as useful as you expected: there's just too much noise in the data.
 
 Instead, consider sums of a three-measurement sliding window. Again considering the above example:
@@ -92,17 +94,17 @@ In this example, there are 5 sums that are larger than the previous sum.
 
 Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
 """
-#create a list of 3 measurment sliding window sums using the variable "depths"
-sums = [depths[i]+depths[i+1]+depths[i+2] for i in range(0,(len(depths)-2))]
-
-#loop through sums to determine quantity of sums that has a value greater than the previous sum in the series
-qty_greater = 0
-for i in range(0,len(sums)-1):
-  if sums[i+1]>sums[i]:
-    qty_greater+=1
-#return the solution to the challenge which is the number of times a 3-depth window sum exceeds the previous sum in the series
-print(qty_greater)
-
+#loop through the list of depths and compute sliding sums using the range function and incremental additions 
+times_greater = 0
+for i in range(0,len(depth_list)):
+    try:
+        window_1 = depth_list[i]+depth_list[i+1]+depth_list[i+2]
+        window_2 = depth_list[i+1]+depth_list[i+2]+depth_list[i+3]
+        if window_2 > window_1:
+            times_greater+=1
+    except:
+        pass
+print(times_greater)
 
   
 
