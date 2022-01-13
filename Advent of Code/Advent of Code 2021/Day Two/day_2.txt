@@ -1,4 +1,4 @@
-raw_movements = """forward 1
+forward 1
 down 5
 down 6
 down 2
@@ -997,4 +997,4 @@ down 8
 up 7
 down 2
 down 6
-forward 5"""
+forward 5
